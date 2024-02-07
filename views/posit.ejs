@@ -1,86 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <!-- Meta tags for character set, viewport, and CSRF token -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="<%= csrfToken %>" />
+
+    <!-- Internal CSS styles -->
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+      /* Global styles */
+      body {
+        font-family: "Arial", sans-serif;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
 
-        .graph-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            /* Add padding for better aesthetics */
-            margin: 10px;
-            /* Add margin for better spacing */
-        }
+      /* Styles for the graph box */
+      .graph-container {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 10px;
+      }
 
-        .chart-container {
-            display: flex;
-            border: 1px solid #ccc;
-            margin-left: 0;
-            /* Adjust the margin to start from the left side */
-        }
+      /* Styles for the chart container */
+      .chart-wrapper {
+        display: flex;
+        border: 1px solid #ccc;
+        margin-left: 0;
+      }
 
-        .bar {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            margin-right: 15px;
-            /* Adjust the margin between bars (increased to 15px) */
-        }
+      /* Styles for each bar */
+      .bar-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 15px;
+      }
 
-        .bar div {
-            width: 50px;
-            margin: 5px;
-            background-color: #3498db;
-            text-align: center;
-            color: white;
-            font-size: 14px;
-            padding: 5px;
-            box-sizing: border-box;
-        }
+      /* Styles for the bar content */
+      .bar {
+        width: 50px;
+        margin: 5px;
+        background-color: #3498db;
+        text-align: center;
+        color: white;
+        font-size: 14px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
 
-        .bar span {
-            margin-top: 10px;
-            /* Adjust the margin between the bar and the text */
-            white-space: nowrap;
-            /* Prevent text from wrapping */
-        }
+      /* Styles for the bar labels */
+      .bar-label {
+        margin-top: 10px;
+        white-space: nowrap;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <!-- Graph box container -->
+    <div class="graph-container">
+      <!-- Note about the graph -->
+      <p class="note text-center text-xl font-bold mb-4">
+        This graph illustrates the number of enrolled students per course. The
+        height of each bar corresponds to the number of students enrolled, and
+        the value is displayed at the top of the bar.
+      </p>
 
-    <div class="graph-box">
-        <p class="note text-center text-xl font-bold mb-4">
-            Note: This is the course vs enroll students bar graph. You can find the number of enrolled students at the
-            top of the bar.
-        </p>
-        <div class="chart-container" id="chartContainer">
-            <% for (let i=0; i < educss.length; i++) { %>
-                <div class="bar">
-                    <% const barHeight=enrollments[i] * 20; %>
-                        <div style="height: <%= barHeight %>px">
-                            <%= enrollments[i] %>
-                        </div>
-                        <span>
-                            <%= educss[i] %>
-                        </span>
-                </div>
-                <% } %>
+      <!-- Chart container -->
+      <div class="chart-wrapper" id="chartContainer">
+        <!-- Loop through data to generate bars -->
+        <% for (let i=0; i < courses.length; i++) { %>
+        <!-- Bar element -->
+        <div class="bar-container">
+          <!-- Calculate bar height based on enrollment count -->
+          <% const barHeight = enrollments[i] * 20; %>
+          <!-- Bar with dynamic height -->
+          <div class="bar" style="height: <%= barHeight %>px">
+            <!-- Display enrollment count -->
+            <%= enrollments[i] %>
+          </div>
+          <!-- Display course label -->
+          <span class="bar-label"> <%= courses[i] %> </span>
         </div>
+        <% } %>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>

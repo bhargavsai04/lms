@@ -1,112 +1,120 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Multi-Page Navigation</title>
-    <!-- Include Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <head>
+    <!-- Page Title: Multi-Page Navigation -->
+    <title>Interactive Page Navigation</title>
+    <!-- Include Tailwind CSS stylesheet -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="<%= csrfToken %>" />
-</head>
-
-<body class="p-4">
-    <div class="navbar bg-gray-900 text-white p-4 mb-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="navbar-logo">
-                    <img src="https://superblog.supercdn.cloud/site_cuid_clbaherx5941821ml5d9gt506f/images/logo-ooolab-1686735396309.jpg"
-                        alt="Logo" class="max-h-10">
-                </div>
-
-
-            </div>
-            <div class="flex space-x-8">
-                <a href="/show" class="text-white">Home</a>
-                <a href="/about" class="text-white">About</a>
-                <a href="/contact" class="text-white">Contact</a>
-
-                <a href="/mycourse" class="text-white">mycourse</a>
-
-            </div>
+  </head>
+  <body class="p-4">
+    <!-- Navigation bar -->
+    <div class="navigation-bar bg-gray-900 text-white p-4 mb-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+          <div class="navigation-logo">
+            <img
+              src="https://img.freepik.com/free-vector/school-education-logo-template_23-2149713051.jpg?w=740&t=st=1707238791~exp=1707239391~hmac=47a76b893ed86a6fb26db168c3d474bf17a29d0e1cd67bdd578f6b82f25f05cb"
+              alt="Logo"
+              class="max-h-10"
+            />
+          </div>
         </div>
+        <div class="flex space-x-8">
+          <a href="/show" class="navigation-link text-white">Home</a>
+          <a href="/about" class="navigation-link text-white">About</a>
+          <a href="/contact" class="navigation-link text-white">Contact</a>
+          <a href="/mycourse" class="navigation-link text-white">My Course</a>
+        </div>
+      </div>
     </div>
-    <!-- Use Tailwind CSS classes -->
-    <div class="bg-white p-4 rounded shadow-lg">
-        <div id="page-container">
-            <% for (let page of pages) { %>
-                <div class="page" style="display: none;">
-                    <div class="flex items-center mb-2">
-
-
-
-                    </div>
-                    <%- page.word %>
-                </div>
-                <% } %>
-
-                    <!-- Add more pages as needed -->
-
+    <!-- Main content area -->
+    <div class="content-box bg-white p-4 rounded shadow-lg">
+      <!-- Container for pages -->
+      <div id="page-container">
+        <% for (let page of pages) { %>
+        <div class="page" style="display: none">
+          <!-- Display page content -->
+          <%- page.word %>
         </div>
-        <div class="flex justify-between">
-            <button id="back-button" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Back</button>
-            <button id="next-button" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Next</button>
-        </div>
+        <% } %>
+      </div>
+      <!-- Navigation buttons -->
+      <div class="flex justify-between">
+        <!-- Back button -->
+        <button
+          id="back-button"
+          class="navigation-button bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+        >
+          Back
+        </button>
+        <!-- Next button -->
+        <button
+          id="next-button"
+          class="navigation-button bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+        >
+          Next
+        </button>
+      </div>
     </div>
 
     <script>
-        var pages = document.querySelectorAll('#page-container .page');
-        var backButton = document.getElementById('back-button');
-        var nextButton = document.getElementById('next-button');
+      // Get page elements and buttons
+      var pages = document.querySelectorAll("#page-container .page");
+      var backButton = document.getElementById("back-button");
+      var nextButton = document.getElementById("next-button");
+      // Initialize current page index
+      var currentIndex = sessionStorage.getItem("currentPageIndex");
+      if (currentIndex === null) {
+        currentIndex = 0; // Default to the first page
+      } else {
+        currentIndex = parseInt(currentIndex);
+      }
 
-        // Check if the current page index is stored in session storage
-        var currentIndex = sessionStorage.getItem('currentPageIndex');
-        if (currentIndex === null) {
-            currentIndex = 0; // Default to the first page
-        } else {
-            currentIndex = parseInt(currentIndex);
+      // Display the current page and update navigation buttons
+      function displayCurrentPage() {
+        for (var i = 0; i < pages.length; i++) {
+          if (i === currentIndex) {
+            pages[i].style.display = "block";
+          } else {
+            pages[i].style.display = "none";
+          }
         }
+        // Update visibility of navigation buttons
+        backButton.classList.toggle("hidden", currentIndex === 0);
+        nextButton.classList.toggle(
+          "hidden",
+          currentIndex === pages.length - 1
+        );
+        // Store the current page index in session storage
+        sessionStorage.setItem("currentPageIndex", currentIndex);
+      }
 
-        function displayCurrentPage() {
-            for (var i = 0; i < pages.length; i++) {
-                if (i === currentIndex) {
-                    pages[i].style.display = 'block';
-                } else {
-                    pages[i].style.display = 'none';
-                }
-            }
-
-            if (currentIndex === 0) {
-                backButton.classList.add('hidden');
-                nextButton.classList.remove('hidden');
-            } else if (currentIndex === pages.length - 1) {
-                backButton.classList.remove('hidden');
-                nextButton.classList.add('hidden');
-            } else {
-                backButton.classList.remove('hidden');
-                nextButton.classList.remove('hidden');
-            }
-
-            // Store the current page index in session storage
-            sessionStorage.setItem('currentPageIndex', currentIndex);
+      // Navigate to the next page
+      function nextPage() {
+        if (currentIndex < pages.length - 1) {
+          currentIndex++;
+          displayCurrentPage();
         }
+      }
 
-        function nextPage() {
-            if (currentIndex < pages.length - 1) {
-                currentIndex++;
-                displayCurrentPage();
-            }
+      // Navigate to the previous page
+      function prevPage() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          displayCurrentPage();
         }
+      }
 
-        function prevPage() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                displayCurrentPage();
-            }
-        }
-
-        nextButton.addEventListener('click', nextPage);
-        backButton.addEventListener('click', prevPage);
-        displayCurrentPage(); // Display the last viewed page or the first page initially.
+      // Add event listeners to navigation buttons
+      nextButton.addEventListener("click", nextPage);
+      backButton.addEventListener("click", prevPage);
+      // Display the last viewed page or the first page initially.
+      displayCurrentPage();
     </script>
-</body>
-
+  </body>
 </html>

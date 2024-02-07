@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta tags for character set, viewport, and CSRF token -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSRF token for security -->
     <meta name="csrf-token" content="<%= csrfToken %>" />
-    <title>Learning Management System</title>
+    <!-- Title of the Learning Management System -->
+    <title>Learning Management System - Empowering Education</title>
+    <!-- CSS styling for the page -->
     <style>
       body {
         font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
+        background-color: #e0e0e0;
         color: #333;
         margin: 0;
         padding: 0;
@@ -29,25 +33,30 @@
       }
     </style>
   </head>
-
   <body>
+    <!-- Main content container -->
     <div class="container">
+      <!-- Introduction paragraph about the Learning Management System -->
       <p>
-        The learning management system is developed using Node.js, Express.js,
-        Sequelize, and Passport.js for authentication. It serves both students
-        and educators, distinguishing them by roles. Educators have the
-        privilege to create courses, chapters, and pages, while students can
-        enroll in courses and access content.
+        Welcome to our Learning Management System (LMS), designed to empower
+        educators and students alike. Utilizing cutting-edge technologies such
+        as Node.js, Express.js, Sequelize, and Passport.js, our platform
+        delivers a robust authentication system ensuring secure access for all
+        users.
       </p>
+      <!-- Additional details about user-friendliness -->
       <p>
-        The platform puts emphasis on user-friendliness, allowing users to
-        conveniently update passwords on their dashboard and sign out from any
-        location.
+        Our LMS prioritizes user-friendliness, allowing seamless password
+        updates and convenient sign-out options from any location. These
+        features are tailored to enhance the user experience, promoting
+        effortless interaction and engagement with the platform.
       </p>
+      <!-- Importance of security, reliability, and tracking progress -->
       <p>
-        Security and reliability are paramount in the system design, along with
-        features aiding in progress tracking and achieving educational
-        objectives.
+        Security and reliability are fundamental pillars of our system,
+        guaranteeing a safe and dependable learning environment. Furthermore,
+        progress-tracking features facilitate goal achievement and ensure
+        optimal learning outcomes for every user.
       </p>
     </div>
   </body>

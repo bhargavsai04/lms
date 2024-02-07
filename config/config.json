@@ -2,14 +2,14 @@
   "development": {
     "username": "postgres",
     "password": "bhargav",
-    "database": "wd-lms-project",
+    "database": "lms-project",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "bhargav",
-    "database": "wd-lms-test",
+    "database": "lms-test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

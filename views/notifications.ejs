@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Document Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- External Stylesheet Link -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Title -->
+    <title>Error Messages</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Your Page Title</title>
-</head>
-
-<body>
-  <% if (messages && messages.error && messages.error.length> 0) { %>
-    <ul class="bg-red-300 text-red-900 p-4 rounded-lg">
-      <% for (var i=0; i < messages.error.length; i++) { %>
-        <li class="mb-2">
-          <%= messages.error[i] %>
-        </li>
-        <% } %>
+  <body>
+    <!-- Display error messages if any -->
+    <% if (messages && messages.error && messages.error.length > 0) { %>
+    <!-- Error Message List -->
+    <ul class="error-messages">
+      <!-- Iterate over error messages -->
+      <% for (var i = 0; i < messages.error.length; i++) { %>
+      <!-- Individual Error Message Item -->
+      <li><%= messages.error[i] %></li>
+      <% } %>
     </ul>
     <% } %>
-</body>
-
+  </body>
 </html>

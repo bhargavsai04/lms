@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Title of the HTML page -->
+    <title>Interactive Page Navigation</title>
+    <!-- Meta tag for CSRF token -->
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <!-- Include Tailwind CSS stylesheet -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- Script for updating page content -->
+    <script>
+      // Function to update page content via fetch API
+      function updatePage(id, ip) {
+        fetch(`/page/${id}/${ip}`, {
+          method: "put",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        })
+          .then((res) => {
+            if (res.ok) {
+              // Reload the page if update is successful
+              window.location.reload();
+              console.log("Page updated successfully.");
+            }
+          })
+          .catch((err) => console.error(err));
+      }
+    </script>
+  </head>
+
+  <body class="p-4">
+    <!-- Navigation bar -->
+    <div class="navbar bg-gray-600 text-white p-4 mb-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+          <!-- School logo -->
+          <div class="navbar-logo">
+            <!-- Insert your logo image here -->
+            <img
+              src="https://img.freepik.com/free-vector/school-education-logo-template_23-2149713051.jpg?w=740&t=st=1707238791~exp=1707239391~hmac=47a76b893ed86a6fb26db168c3d474bf17a29d0e1cd67bdd578f6b82f25f05cb"
+              alt="Logo"
+              class="max-h-10"
+            />
+          </div>
+        </div>
+        <!-- Navigation links -->
+        <div class="flex space-x-8">
+          <a href="/show" class="nav-link">Home</a>
+          <a href="/about" class="nav-link">About</a>
+          <a href="/contact" class="nav-link">Contact</a>
+          <a href="/CourseViewManagerOnline/<%=packid%>" class="nav-link"
+            >Chapter List</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Page content container -->
+    <div class="bg-white p-4 rounded shadow-lg">
+      <div id="page-container">
+        <!-- Loop through pages and display content -->
+        <% for (let page of pages) { %>
+        <div class="page hidden">
+          <div class="flex items-center mb-2"></div>
+          <%- page.word %>
+        </div>
+        <% } %>
+      </div>
+      <!-- Navigation buttons -->
+      <div class="flex justify-between">
+        <button id="back-button" class="navigation-button">Back</button>
+        <button id="next-button" class="navigation-button">Next</button>
+      </div>
+    </div>
+
+    <!-- Script section -->
+    <script>
+      // Select elements and initialize currentIndex from sessionStorage
+      var pages = document.querySelectorAll("#page-container .page");
+      var backButton = document.getElementById("back-button");
+      var nextButton = document.getElementById("next-button");
+      var currentIndex = sessionStorage.getItem("currentPageIndex");
+      if (currentIndex === null) {
+        currentIndex = 0; // Default to first page if no stored index
+      } else {
+        currentIndex = parseInt(currentIndex);
+      }
+
+      // Function to display the current page and update sessionStorage
+      function displayCurrentPage() {
+        for (var i = 0; i < pages.length; i++) {
+          // Show or hide pages based on currentIndex
+          pages[i].style.display = i === currentIndex ? "block" : "none";
+        }
+        // Toggle visibility of navigation buttons based on currentIndex
+        backButton.classList.toggle("hidden", currentIndex === 0);
+        nextButton.classList.toggle(
+          "hidden",
+          currentIndex === pages.length - 1
+        );
+        // Store the current page index in sessionStorage
+        sessionStorage.setItem("currentPageIndex", currentIndex);
+      }
+
+      // Function to navigate to the next page
+      function nextPage() {
+        if (currentIndex < pages.length - 1) {
+          currentIndex++;
+          displayCurrentPage();
+        }
+      }
+
+      // Function to navigate to the previous page
+      function prevPage() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          displayCurrentPage();
+        }
+      }
+
+      // Event listeners for navigation buttons
+      nextButton.addEventListener("click", nextPage);
+      backButton.addEventListener("click", prevPage);
+      // Display the current page initially or the last viewed page
+      displayCurrentPage();
+    </script>
+  </body>
+</html>

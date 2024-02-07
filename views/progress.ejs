@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Progress</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <head>
+    <!-- Page Title -->
+    <title>Student Course Progress</title>
+    <!-- Include Tailwind CSS stylesheet -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="<%= csrfToken %>" />
-</head>
-
-<body class="bg-gray-100 flex justify-center items-center h-screen">
-    <div class="bg-white p-8 rounded shadow-lg">
-        <h1 class="text-2xl font-semibold mb-4">Course Progress</h1>
-        <table class="w-full">
-            <thead>
-                <tr>
-                    <th class="px-4 py-2">Number</th>
-                    <th class="px-4 py-2">Student ID</th>
-                    <th class="px-4 py-2">Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% enrolls.forEach((enroll, index)=> { %>
-                    <tr>
-                        <td class="px-4 py-2">
-                            <%= index + 1 %>
-                        </td>
-                        <td class="px-4 py-2">
-                            <%= enroll.studentId %>
-                        </td>
-                        <% for (let user of users) { %>
-                            <% if (user.id==enroll.studentId) { %>
-                                <td class="px-4 py-2">
-                                    <%= user.firstName %>
-                                        <%= user.lastName %>
-                                </td>
-                                <% } %>
-                                    <% } %>
-                                        <td class="px-4 py-2">
-                                            <a href="/student/<%= enroll.studentId %>/<%= packId %>"
-                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">View
-                                                Progress</a>
-                                        </td>
-                    </tr>
-                    <% }); %>
-            </tbody>
-        </table>
+  </head>
+  <body class="bg-gray-100 flex justify-center items-center h-screen">
+    <!-- Container for displaying course progress -->
+    <div class="progress-container bg-white p-8 rounded shadow-lg">
+      <!-- Title -->
+      <h1 class="text-2xl font-semibold mb-4">Track Student Course Progress</h1>
+      <!-- Table to display student progress -->
+      <table class="w-full">
+        <thead>
+          <!-- Table header -->
+          <tr>
+            <th class="px-4 py-2">Serial Number</th>
+            <th class="px-4 py-2">Student ID</th>
+            <th class="px-4 py-2">Student Name</th>
+            <th class="px-4 py-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Loop through enrollments data -->
+          <% enrolls.forEach((enroll, index)=> { %>
+          <tr>
+            <!-- Display serial number -->
+            <td class="px-4 py-2"><%= index + 1 %></td>
+            <!-- Display student ID -->
+            <td class="px-4 py-2"><%= enroll.studentId %></td>
+            <!-- Loop through users data to find student name -->
+            <% for (let user of users) { %> <% if (user.id==enroll.studentId) {
+            %>
+            <!-- Display student name -->
+            <td class="px-4 py-2">
+              <%= user.firstName %> <%= user.lastName %>
+            </td>
+            <% } %> <% } %>
+            <!-- Provide link to view student progress -->
+            <td class="px-4 py-2">
+              <a
+                href="/student-progress/<%= enroll.studentId %>/<%= packId %>"
+                class="progress-link bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block"
+              >
+                View Progress
+              </a>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
     </div>
-</body>
-
+  </body>
 </html>

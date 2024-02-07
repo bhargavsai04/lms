@@ -3,41 +3,46 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const process = require('process');
+const processEnv = require('process');
+
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
+const environment = processEnv.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.json')[environment];
+const database = {};
 
 let sequelize;
+
+// Establish Sequelize connection based on environment configuration
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(processEnv.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-fs
-  .readdirSync(__dirname)
+// Read through each model file in the current directory and import it
+fs.readdirSync(__dirname)
   .filter(file => {
     return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
+      file.indexOf('.') !== 0 && // Exclude hidden files
+      file !== basename && // Exclude the current file
+      file.slice(-3) === '.js' && // Select JavaScript files
+      !file.includes('.test.js') // Avoid loading test files
     );
   })
   .forEach(file => {
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+    database[model.name] = model;
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+// Associate models if associations are defined
+Object.keys(database).forEach(modelName => {
+  if (database[modelName].associate) {
+    database[modelName].associate(database);
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+// Export the Sequelize connection and models
+database.sequelize = sequelize;
+database.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = database;

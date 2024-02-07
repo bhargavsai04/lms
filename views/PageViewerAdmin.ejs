@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Document Title -->
+    <title>Interactive Course Content</title>
+    <!-- Include CSRF token for security -->
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <!-- Include Tailwind CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+  </head>
+
+  <body class="p-4">
+    <!-- Navigation Bar -->
+    <div class="navbar bg-gray-600 text-white p-4 mb-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+          <!-- Logo -->
+          <div class="navbar-logo">
+            <!-- Insert your logo image here -->
+            <img
+              src="https://img.freepik.com/free-vector/school-education-logo-template_23-2149713051.jpg?w=740&t=st=1707238791~exp=1707239391~hmac=47a76b893ed86a6fb26db168c3d474bf17a29d0e1cd67bdd578f6b82f25f05cb"
+              alt="Logo"
+              class="max-h-10"
+            />
+          </div>
+        </div>
+        <div class="flex space-x-8">
+          <!-- Navigation Links -->
+          <a href="/show" class="text-white">Home</a>
+          <a href="/about" class="text-white">About</a>
+          <a href="/contact" class="text-white">Contact</a>
+          <a href="/CourseViewerAdmin/<%=packid%>" class="text-white"
+            >Chapter List</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Page Content -->
+    <div class="bg-white p-4 rounded shadow-lg">
+      <div id="page-container">
+        <% for (let page of pages) { %>
+        <!-- Iterate over each page -->
+        <div class="page hidden">
+          <!-- Hidden by default -->
+          <div class="flex items-center mb-2"></div>
+          <!-- Page content -->
+          <%- page.word %>
+        </div>
+        <% } %>
+      </div>
+      <!-- Navigation Buttons -->
+      <div class="flex justify-between">
+        <!-- Back button -->
+        <button
+          id="back-button"
+          class="nav-button bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 hidden"
+        >
+          Back
+        </button>
+        <!-- Next button -->
+        <button
+          id="next-button"
+          class="nav-button bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Select relevant elements
+      var pages = document.querySelectorAll("#page-container .page");
+      var backButton = document.getElementById("back-button");
+      var nextButton = document.getElementById("next-button");
+
+      // Retrieve current page index from session storage
+      var currentIndex = sessionStorage.getItem("currentPageIndex");
+      if (currentIndex === null) {
+        currentIndex = 0; // Default to first page
+      } else {
+        currentIndex = parseInt(currentIndex);
+      }
+
+      // Function to display current page and manage navigation buttons
+      function displayCurrentPage() {
+        for (var i = 0; i < pages.length; i++) {
+          if (i === currentIndex) {
+            pages[i].classList.remove("hidden"); // Show current page
+          } else {
+            pages[i].classList.add("hidden"); // Hide other pages
+          }
+        }
+
+        // Manage visibility of back and next buttons based on current page
+        if (currentIndex === 0) {
+          backButton.classList.add("hidden"); // Hide back button on first page
+          nextButton.classList.remove("hidden"); // Show next button
+        } else if (currentIndex === pages.length - 1) {
+          backButton.classList.remove("hidden"); // Show back button on last page
+          nextButton.classList.add("hidden"); // Hide next button
+        } else {
+          backButton.classList.remove("hidden"); // Show both buttons in between
+          nextButton.classList.remove("hidden");
+        }
+
+        // Store current page index in session storage
+        sessionStorage.setItem("currentPageIndex", currentIndex);
+      }
+
+      // Function to navigate to next page
+      function nextPage() {
+        if (currentIndex < pages.length - 1) {
+          currentIndex++;
+          displayCurrentPage();
+        }
+      }
+
+      // Function to navigate to previous page
+      function prevPage() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          displayCurrentPage();
+        }
+      }
+
+      // Event listeners for button clicks
+      nextButton.addEventListener("click", nextPage);
+      backButton.addEventListener("click", prevPage);
+
+      // Initial display of current page
+      displayCurrentPage();
+    </script>
+  </body>
+</html>
