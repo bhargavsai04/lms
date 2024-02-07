@@ -103,20 +103,14 @@
 </head>
 
 <body class="font-sans bg-gray-100 min-h-screen">
-    <div class="moving-line-container text-lg">
-        <div class="moving-line r">
-            Greetings, <%= a.firstName %>! 
-        </div>
-    </div>
-
     <!-- Navbar -->
     <div class="navbar bg-gray-900 text-white p-4 mb-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <div class="navbar-logo">
-                    <!-- <img src="https://superblog.supercdn.cloud/site_cuid_clbaherx5941821ml5d9gt506f/images/logo-ooolab-1686735396309.jpg"
-                        alt="Logo" class="max-h-10"> -->
-                </div>
+                <!-- <div class="navbar-logo">
+                    <img src="https://cdn.vectorstock.com/i/1000x1000/60/90/lms-learning-management-system-line-icon-vector-42366090.webp"
+                        alt="Logo" class="max-h-10">
+                </div> -->
                 <div class="relative flex items-center">
                     <i class="fas fa-search text-gray-700 mr-2"></i>
                     <input type="search" placeholder="Search"
@@ -177,7 +171,7 @@
                             class="p-6 bg-green-300 text-gray-800 rounded-lg shadow-md hover:bg-indigo-300 transition duration-300 ease-in-out transform hover:scale-105">
                             <div class="text-xl font-bold mb-2">
                                 <%= pack.heading %>
-                                    <a href="/viewcourseadminonline/<%= pack.id %>"
+                                    <a href="/CourseViewManagerOnline/<%= pack.id %>"
                                         class="enroll-link bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg mb-2 hover:bg-blue-800 transition duration-300 ease-in-out inline-block">Visit</a>
                             </div>
 
