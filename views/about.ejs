@@ -1,20 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <!-- Meta tags for character set, viewport, and CSRF token -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSRF token for security -->
     <meta name="csrf-token" content="<%= csrfToken %>" />
-    <title>Document</title>
-</head>
+    <!-- Title of the Learning Management System -->
+    <title>Learning Management System - Empowering Education</title>
+    <!-- CSS styling for the page -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e0e0e0;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
 
-<body>
-    <p>The learning management system is built using Node.js, Express.js, Sequelize, and Passport</p>
-    <p> .js for authentication. It caters to both students and educators, dividing them by roles. E</p>
-    <p> ducators can create courses, chapters, and pages, while students can enroll in courses and view
-    <p> content. The platform emphasizes user-friendliness, allowing users to change passwords on their homepage and
-        sign out from anywhere. </p>
-    <p> The system prioritizes security, reliability, and aids in tracking progress and achieving educational goals.</p>
-</body>
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
+      p {
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main content container -->
+    <div class="container">
+      <!-- Introduction paragraph about the Learning Management System -->
+      <p>
+        Welcome to our Learning Management System (LMS), designed to empower
+        educators and students alike. Utilizing cutting-edge technologies such
+        as Node.js, Express.js, Sequelize, and Passport.js, our platform
+        delivers a robust authentication system ensuring secure access for all
+        users.
+      </p>
+      <!-- Additional details about user-friendliness -->
+      <p>
+        Our LMS prioritizes user-friendliness, allowing seamless password
+        updates and convenient sign-out options from any location. These
+        features are tailored to enhance the user experience, promoting
+        effortless interaction and engagement with the platform.
+      </p>
+      <!-- Importance of security, reliability, and tracking progress -->
+      <p>
+        Security and reliability are fundamental pillars of our system,
+        guaranteeing a safe and dependable learning environment. Furthermore,
+        progress-tracking features facilitate goal achievement and ensure
+        optimal learning outcomes for every user.
+      </p>
+    </div>
+  </body>
 </html>

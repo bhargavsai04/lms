@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <!-- Include Tailwind CSS stylesheet -->
-  <meta name="csrf-token" content="<%= csrfToken %>" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-
-<body>
-
-  <div class="flex justify-center items-center h-screen">
-    <div class="w-1/2 bg-blue-200 h-10 relative">
-      <div class="absolute inset-0 bg-green-500" style="width: <%= p %>%;"></div>
-      <div class="absolute inset-0 flex items-center justify-center text-white font-bold">
-        <%= p %> %
+  <head>
+    <!-- Include Tailwind CSS stylesheet -->
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Container to center content vertically and horizontally -->
+    <div class="flex justify-center items-center h-screen">
+      <!-- Progress bar container -->
+      <div class="w-1/2 bg-green-200 h-10 relative">
+        <!-- Progress bar indicating completion percentage -->
+        <div
+          class="absolute inset-0 bg-blue-500"
+          style="width: <%= p %>%"
+        ></div>
+        <!-- Text showing the completion percentage -->
+        <div
+          class="absolute inset-0 flex items-center justify-center text-white font-bold"
+        >
+          <%= p %> %
+        </div>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

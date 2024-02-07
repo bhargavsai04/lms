@@ -1,63 +1,80 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
+    <!-- Document Title -->
     <title>Chapter List</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
+    <!-- External Stylesheet for Tailwind CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+    />
+    <!-- CSRF Token Meta Tag -->
     <meta name="csrf-token" content="<%= csrfToken %>" />
-</head>
+  </head>
 
-<body class="bg-gray-100 ">
-
+  <body class="bg-gray-100">
+    <!-- Navigation Bar -->
     <div class="navbar bg-gray-900 text-white p-4 mb-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="navbar-logo">
-                    <img src="https://superblog.supercdn.cloud/site_cuid_clbaherx5941821ml5d9gt506f/images/logo-ooolab-1686735396309.jpg"
-                        alt="Logo" class="max-h-10">
-                </div>
-
-
-            </div>
-            <div class="flex space-x-8">
-                <a href="/show" class="text-white">Home</a>
-                <a href="/about" class="text-white">About</a>
-                <a href="/contact" class="text-white">Contact</a>
-
-                <a href="/mycoursestudent/<%= a%>" class="text-white">mycourse</a>
-
-            </div>
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+          <div class="navbar-logo">
+            <!-- Logo Image -->
+            <img
+              src="https://img.freepik.com/free-vector/school-education-logo-template_23-2149713051.jpg?w=740&t=st=1707238791~exp=1707239391~hmac=47a76b893ed86a6fb26db168c3d474bf17a29d0e1cd67bdd578f6b82f25f05cb"
+              alt="Logo"
+              class="max-h-10"
+            />
+          </div>
         </div>
+        <div class="flex space-x-8">
+          <!-- Navigation Links -->
+          <a href="/show" class="text-white">Home</a>
+          <a href="/about" class="text-white">About</a>
+          <a href="/contact" class="text-white">Contact</a>
+          <!-- Dynamic Link Based on Parameter -->
+          <a href="/mycoursestudent/<%= a%>" class="text-white">MyCourses</a>
+        </div>
+      </div>
     </div>
 
+    <!-- Page Heading -->
     <h1 class="text-3xl font-bold text-center my-6">Chapters</h1>
+    <!-- Table to Display Chapter Information -->
     <table class="table-auto w-full bg-white rounded-lg shadow-lg p-4">
-        <thead>
-            <tr class="bg-gray-200">
-                <th class="px-4 py-2">Chapter ID</th>
-                <th class="px-4 py-2">Title</th>
-                <th class="px-4 py-2">Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% let i=0; Chapters.forEach(function(chapter, index) {i++ %>
-                <tr class="<%= index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200' %> hover:bg-gray-300">
-                    <td class="px-4 py-2">
-                        <%= i %>
-                    </td>
-                    <td class="px-4 py-2"><a href="/acpage/<%= chapter.id %>/<%=packId%>">
-                            <div class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">
-                                <%= chapter.title %>
-                            </div>
-                        </a> <!-- Add an <a> tag with a link --></td>
-                    <td class="px-4 py-2">
-                        <%= chapter.description %>
-                    </td>
-                </tr>
-                <% }); %>
-        </tbody>
+      <thead>
+        <tr class="bg-gray-200">
+          <!-- Table Header Columns -->
+          <th class="px-4 py-2">Chapter ID</th>
+          <th class="px-4 py-2">Title</th>
+          <th class="px-4 py-2">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let i=0; Chapters.forEach(function(chapter, index) {i++ %>
+        <tr
+          class="<%= index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200' %> hover:bg-gray-300"
+        >
+          <!-- Table Data -->
+          <td class="px-4 py-2"><%= i %></td>
+          <td class="px-4 py-2">
+            <!-- Link to Chapter Page -->
+            <a href="/acpage/<%= chapter.id %>/<%=packId%>">
+              <!-- Dynamic Styling for Chapter Title -->
+              <div
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              >
+                <%= chapter.title %>
+              </div>
+            </a>
+          </td>
+          <td class="px-4 py-2"><%= chapter.description %></td>
+        </tr>
+        <% }); %>
+      </tbody>
     </table>
-    <p class="text-3xl font-bold text-center my-6">Note:CLick the green buttons to start your learning</p>
-</body>
-
+    <!-- Note for Users -->
+    <p class="text-3xl font-bold text-center my-6">
+      Note: Click the blue buttons to start your learning
+    </p>
+  </body>
 </html>

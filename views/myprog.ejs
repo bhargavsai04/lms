@@ -1,47 +1,62 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <!-- Include Tailwind CSS stylesheet -->
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <!-- Include Tailwind CSS stylesheet -->
-  <meta name="csrf-token" content="<%= csrfToken %>" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-
-<body>
-  <div class="navbar bg-gray-900 text-white p-4 mb-4">
-    <div class="container mx-auto flex justify-between items-center">
-      <div class="flex items-center">
-        <div class="navbar-logo">
-          <img
-            src="https://superblog.supercdn.cloud/site_cuid_clbaherx5941821ml5d9gt506f/images/logo-ooolab-1686735396309.jpg"
-            alt="Logo" class="max-h-10">
+  <body>
+    <!-- Navbar section -->
+    <div class="navbar bg-gray-900 text-white p-4 mb-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+          <!-- School logo -->
+          <div>
+            <img
+              src="https://img.freepik.com/free-vector/school-education-logo-template_23-2149713051.jpg?w=740&t=st=1707238791~exp=1707239391~hmac=47a76b893ed86a6fb26db168c3d474bf17a29d0e1cd67bdd578f6b82f25f05cb"
+              alt="Logo"
+              class="max-h-10"
+            />
+          </div>
         </div>
-
-      </div>
-      <div class="flex space-x-8">
-        <a href="/show" class="text-white">Home</a>
-        <a href="/about" class="text-white">About</a>
-        <a href="/contact" class="text-white">Contact</a>
-
-        <a href="/mycoursestudent/<%=a%>" class="text-white">mycourse</a>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="flex justify-center items-center h-screen">
-    <div>
-      <img src="https://media.baamboozle.com/uploads/images/292423/1620326289_18606_url.jpeg" alt="progress">
-    </div>
-
-    <div class="w-1/2 bg-blue-200 h-10 relative">
-
-      <div class="absolute inset-0 bg-green-500" style="width: <%= p %>%;"></div>
-      <div class="absolute inset-0 flex items-center justify-center text-white font-bold">
-        <%= p %> %
+        <!-- Navigation links -->
+        <div class="flex space-x-8">
+          <a href="/show" class="text-white">Home</a>
+          <a href="/about" class="text-white">About</a>
+          <a href="/contact" class="text-white">Contact</a>
+          <!-- Link to the student's course -->
+          <a href="/mycoursestudent/<%=a%>" class="text-white">My Course</a>
+        </div>
       </div>
     </div>
-  </div>
-</body>
 
+    <!-- Progress visualization section -->
+    <div class="flex justify-center items-center h-screen">
+      <!-- Image -->
+      <div>
+        <img
+          src="https://media.baamboozle.com/uploads/images/292423/1620326289_18606_url.jpeg"
+          alt="progress"
+        />
+      </div>
+
+      <!-- Progress bar -->
+      <div class="w-1/2 bg-green-200 h-10 relative">
+        <div
+          class="absolute inset-0 bg-blue-500"
+          style="width: <%= p %>%"
+        ></div>
+        <!-- Progress percentage -->
+        <div
+          class="absolute inset-0 flex items-center justify-center text-white font-bold"
+        >
+          <%= p %> %
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
