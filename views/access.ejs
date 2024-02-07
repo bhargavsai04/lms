@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Title describing the purpose of the page -->
-    <title>Learning Modules - Explore Chapters</title>
+    <title>Learning Modules</title>
     <!-- Include Tailwind CSS for styling -->
     <link
       rel="stylesheet"
@@ -18,17 +17,15 @@
         <!-- Logo -->
         <div class="flex items-center">
           <div class="navbar-logo">
-            <!-- Insert logo image -->
-            <!-- <img
+            <img
               src="https://img.freepik.com/free-vector/school-education-logo-template_23-2149713051.jpg?w=740&t=st=1707238791~exp=1707239391~hmac=47a76b893ed86a6fb26db168c3d474bf17a29d0e1cd67bdd578f6b82f25f05cb"
               alt="Logo"
               class="max-h-10"
-            /> -->
+            />
           </div>
         </div>
         <!-- Navigation links -->
         <div class="flex space-x-8">
-          <!-- Static navigation links -->
           <a href="/show" class="text-white">Home</a>
           <a href="/about" class="text-white">About</a>
           <a href="/contact" class="text-white">Contact</a>
@@ -39,29 +36,29 @@
     </div>
 
     <!-- Main content: Chapter list -->
-    <h1 class="text-3xl font-bold text-center my-6">Explore Chapters</h1>
+    <h1 class="text-3xl font-bold text-center my-6">Chapters</h1>
     <!-- Table for displaying chapters -->
     <table class="table-auto w-full bg-white rounded-lg shadow-lg p-4">
       <thead>
         <tr class="bg-gray-200">
-          <!-- Table header columns -->
-          <th class="px-4 py-2">Chapter Number</th>
-          <th class="px-4 py-2">Chapter Title</th>
-          <th class="px-4 py-2">Chapter Description</th>
+          <th class="px-4 py-2">Chapter ID</th>
+          <th class="px-4 py-2">Title</th>
+          <th class="px-4 py-2">Description</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Loop through chapters and display -->
+        <!-- Loop through chapters -->
         <% let i=0; Chapters.forEach(function(chapter, index) {i++ %>
         <tr
           class="<%= index % 2 === 0 ? 'bg-gray-300' : 'bg-gray-400' %> hover:bg-gray-500"
         >
-          <!-- Chapter number -->
+          <!-- Chapter ID -->
           <td class="px-4 py-2"><%= i %></td>
-          <!-- Chapter title -->
+          <!-- Chapter Title -->
           <td class="px-4 py-2">
-            <!-- Link to chapter page with button-like style -->
-            <a href="/chapter-details/<%= chapter.id %>/<%=packId%>">
+            <!-- Link to chapter page -->
+            <a href="/acpage/<%= chapter.id %>/<%=packId%>">
+              <!-- Button-like style for chapter title -->
               <div
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
               >
@@ -69,7 +66,7 @@
               </div>
             </a>
           </td>
-          <!-- Chapter description -->
+          <!-- Chapter Description -->
           <td class="px-4 py-2"><%= chapter.description %></td>
         </tr>
         <% }); %>
@@ -77,7 +74,7 @@
     </table>
     <!-- Note for users -->
     <p class="text-3xl font-bold text-center my-6">
-      Note: Click the chapter titles to begin learning
+      Note: Click the green buttons to start your learning
     </p>
   </body>
 </html>
