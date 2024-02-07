@@ -1,54 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Title: Chapter Overview -->
-    <title>Chapter Overview</title>
-    <!-- Meta tag for CSRF token -->
-    <meta name="csrf-token" content="<%= csrfToken %>" />
-    <!-- Include Tailwind CSS via CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css"
-    />
-  </head>
-  <body class="p-6">
-    <!-- Heading to display the Pack ID -->
-    <h1 class="text-3xl mb-6">Chapters for Pack ID: <%= packId %></h1>
 
-    <!-- Button to enroll in the course -->
+<head>
+    <title>View Courses</title>
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
+</head>
+
+<body class="p-6">
+
+    <h1 class="text-3xl mb-6">Chapters for Pack ID: <%= packId %>
+    </h1>
+
     <div class="mb-6">
-      <a href="/enroll/<%= packId %>" class="block mb-4">
-        <button
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Enroll Now
-        </button>
-      </a>
+
+        <a href="/enroll/<%= packId %>" class="block mb-4">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Enroll
+            </button>
+        </a>
     </div>
 
-    <!-- Table to display chapters -->
     <table class="w-full table-auto">
-      <thead>
-        <!-- Table header -->
-        <tr>
-          <th class="px-4 py-2">Chapter Title</th>
-          <th class="px-4 py-2">Chapter Description</th>
-          <th class="px-4 py-2">Chapter Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Loop through chapters and display each one -->
-        <% chapters.forEach((chapter) => { %>
-        <tr>
-          <!-- Display chapter name -->
-          <td class="border px-4 py-2"><%= chapter.title %></td>
-          <!-- Display chapter description -->
-          <td class="border px-4 py-2"><%= chapter.description %></td>
-          <!-- Display chapter status -->
-          <td class="border px-4 py-2">Locked</td>
-        </tr>
-        <% }); %>
-      </tbody>
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Chapter Name</th>
+                <th class="px-4 py-2">Chapter Description</th>
+                <th class="px-4 py-2">status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% chapters.forEach((chapter)=> { %>
+                <tr>
+                    <td class="border px-4 py-2">
+                        <%= chapter.title %>
+                    </td>
+                    <td class="border px-4 py-2">
+                        <%= chapter.description %>
+                    </td>
+                    <td class="border px-4 py-2">Locked</td>
+                </tr>
+                <% }); %>
+        </tbody>
     </table>
-  </body>
+</body>
+
 </html>

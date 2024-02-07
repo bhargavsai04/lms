@@ -3,9 +3,31 @@
 
 <head>
     <title>Multi-Page Navigation</title>
+    <meta name="csrf-token" content="<%= csrfToken %>" />
     <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <script>
+
+        function updatepage(id, ip) {
+            fetch(`/page/${id}/${ip}`, {
+                method: "put",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+
+                })
+
+            }).then((res) => {
+                if (res.ok) {
+                    window.location.reload()
+                    console.log("ok")
+                }
+
+            }).catch((err) =>
+                console.error(err))
+        }
+
+    </script>
+
 </head>
 
 <body class="p-4">
@@ -23,8 +45,8 @@
                 <a href="/show" class="text-white">Home</a>
                 <a href="/about" class="text-white">About</a>
                 <a href="/contact" class="text-white">Contact</a>
+                <a href="/viewcourseadminonline/<%=packid%>" class="text-white">chapterlist</a>
 
-                <a href="/mycourse" class="text-white">mycourse</a>
 
             </div>
         </div>
@@ -36,14 +58,12 @@
                 <div class="page" style="display: none;">
                     <div class="flex items-center mb-2">
 
-
-
                     </div>
                     <%- page.word %>
                 </div>
                 <% } %>
 
-                    <!-- Add more pages as needed -->
+
 
         </div>
         <div class="flex justify-between">

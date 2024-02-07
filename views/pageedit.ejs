@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Meta tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="<%= csrfToken %>" />
-
-    <!-- External CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <!-- TinyMCE script -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss/2.2.15/dist/tailwind.min.css"
+    />
     <script src="https://cdn.tiny.cloud/1/7sq4hn3oxrd13k079cav03y9vi1okzhz1j1s43qe1rebkcu8/tinymce/5/tinymce.min.js"></script>
-
-    <!-- Page title -->
-    <title>Create New Chapter</title>
-
-    <!-- Internal CSS -->
+    <title>Chapter Creating Page</title>
     <style>
       @keyframes floating {
         0%,
@@ -29,6 +24,7 @@
           transform: translateY(-15px);
         }
       }
+
       .floating-box {
         animation: floating 1s infinite;
       }
@@ -36,35 +32,33 @@
   </head>
 
   <body class="bg-gray-100 h-screen flex items-center justify-center">
-    <!-- Navigation links -->
     <div class="absolute top-6 left-6 space-x-4">
       <a href="/show" class="p-4 text-gray-800 bg-white rounded shadow-md"
         >Home<span class="ml-2 text-green-500">&#8594;</span></a
       >
       <a href="/course" class="p-4 text-gray-800 bg-white rounded shadow-md"
-        ><%=note.heading %><span class="ml-2 text-green-500">&#8594;</span></a
+        ><%=notee.heading %><span class="ml-2 text-green-500">&#8594;</span></a
       >
+
       <a
         href="/edit/<%=packId%>"
         class="p-4 text-gray-800 bg-white rounded shadow-md"
-        >Create Chapter<span class="ml-2 text-green-500">&#8594;</span></a
+        >create chapter<span class="ml-2 text-green-500">&#8594;</span></a
       >
       <a href="/mycourse" class="p-4 text-gray-800 bg-white rounded shadow-md"
-        >My Course<span class="ml-2 text-green-500">&#8594;</span></a
+        >Mycourse<span class="ml-2 text-green-500">&#8594;</span></a
       >
     </div>
-
-    <!-- Information box -->
     <div
       class="absolute top-25 left-1 space-x-4 bg-yellow-300 p-4 floating-box"
     >
       <p>
-        <span class="font-bold text-red-500 italic">Note: 1.</span> IGNORE THE
+        <span class="font-bold text-red-500 italic">N.B: 1.</span> IGNORE THE
         API KEY ERROR AND PROCEED
       </p>
       <p>
-        <span class="font-bold text-red-500 italic">Note: 2.</span> IF YOU
-        CANNOT SEE THE SELECTED CHAPTER IN
+        <span class="font-bold text-red-500 italic">N.B: 2.</span> IF YOU CANNOT
+        SEE THE SELECTED CHAPTER IN
       </p>
       <p>
         <span class="font-bold text-red-500 italic"> </span> SELECTED CHAPTER
@@ -72,32 +66,25 @@
       </p>
     </div>
 
-    <!-- Form section -->
     <div class="bg-white p-8 rounded shadow-md w-full max-w-lg">
-      <h1 class="text-2xl font-bold text-center mb-6">Enter Chapter Details</h1>
+      <h1 class="text-2xl font-bold text-center mb-6">Enter Chapter Name</h1>
       <form action="/pageedit/<%= notee.id %>" method="post" class="space-y-4">
-        <!-- CSRF token -->
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 
-        <!-- Course Name input -->
         <div class="flex flex-col">
-          <label
-            for="courseName"
-            class="text-gray-700 text-sm font-semibold mb-2"
-            >Course Name:</label
+          <label for="heading" class="text-gray-700 text-sm font-semibold mb-2">
+            You entered this course:</label
           >
           <input
             type="text"
-            id="courseName"
-            name="courseName"
+            id="heading"
+            name="heading"
             value="<%=notee.heading %>"
-            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-600"
+            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-green-600"
             placeholder="Enter the course name"
             required
           />
         </div>
-
-        <!-- Chapter selection -->
         <div class="flex flex-col">
           <label
             for="chapterId"
@@ -106,44 +93,38 @@
           >
           <select
             name="chapterId"
-            id="chapterId"
-            class="border rounded-lg p-3 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+            id="notes"
+            class="border rounded-lg p-3 focus:ring-2 focus:ring-green-600 focus:outline-none"
           >
             <% for (let chapter of chapters) { %>
             <option value="<%=chapter.id %>"><%=chapter.title %></option>
             <% } %>
           </select>
         </div>
-
-        <!-- Chapter description textarea -->
         <div class="flex flex-col">
           <label
-            for="description"
-            class="text-gray-600 text-sm font-semibold mb-2"
-            >Chapter Description:</label
+            for="description-text"
+            class="text-gray-700 text-sm font-semibold mb-2"
+            >Chapter Description</label
           >
           <textarea
-            id="description"
-            name="description"
-            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-600"
+            id="description-text"
+            name="word"
+            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-green-600"
             rows="6"
             placeholder="Enter your description here"
           ></textarea>
         </div>
-
-        <!-- Submit button -->
         <div class="text-center mt-4">
           <button
             type="submit"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full focus:outline-none"
+            class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full focus:outline-none"
           >
             Submit
           </button>
         </div>
       </form>
     </div>
-
-    <!-- TinyMCE initialization script -->
     <script>
       tinymce.init({
         selector: "textarea",

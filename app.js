@@ -683,7 +683,7 @@ app.get("/student/:studentId/:packId", connectEnsureLogin.ensureLoggedIn(), asyn
 
         if (req.accepts("html")) {
             // Render HTML view with student progress information
-            res.render('StudentProgram', {
+            res.render('studentprog', {
                 completed,
                 all,
                 p: completionPercentage,
@@ -1178,7 +1178,7 @@ app.get("/adminpageonline/:chapterId", connectEnsureLogin.ensureLoggedIn(), asyn
             const pages = await Page.findAll({ where: { chapterId } });
 
             // Render the admin view of the online course page
-            res.render("PageViewManagerOnline", {
+            res.render("viewpageadminonline", {
                 a: chapterId,
                 p: req.user.id,
                 packid: packId,
