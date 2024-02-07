@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Tailwind CSS via CDN -->
+    <!-- Include Tailwind CSS stylesheet -->
     <meta name="csrf-token" content="<%= csrfToken %>" />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -10,21 +10,16 @@
   </head>
 
   <body>
-    <!-- Container for progress display -->
     <div class="flex justify-center items-center h-screen">
-      <!-- Progress bar container -->
-      <div class="w-1/2 bg-green-200 h-10 relative">
-        <!-- Progress bar -->
+      <div class="w-1/2 bg-blue-200 h-10 relative">
         <div
           class="absolute inset-0 bg-blue-500"
-          style="width: <%= progressPercentage %>%"
+          style="width: <%= p %>%"
         ></div>
-        <!-- Progress label -->
         <div
           class="absolute inset-0 flex items-center justify-center text-white font-bold"
         >
-          <!-- Display progress percentage -->
-          <%= progressPercentage %> %
+          <%= p %> %
         </div>
       </div>
     </div>
